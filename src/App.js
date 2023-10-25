@@ -5,16 +5,12 @@ import "./App.css"
 function App() {
 	const [uno, setUno] = useState(false)
 	const [dos, setDos] = useState(false)
+	const [id, setId] = useState(1)
 
 	useEffect(() => {
 		//! Se ejecuta despues de montarse el componente y en cada cambio de estado
 		console.log("%cSIN DEPENDENCIAS", "background-color: yellow")
 	})
-
-	useEffect(() => {
-		//! Se ejecuta sólo despues de montarse el componente
-		console.log("%c[]", "background-color: orange")
-	}, [])
 
 	useEffect(() => {
 		//! Se ejecuta despues de montarse el componente y en cada cambio de estado de dependencias
@@ -25,7 +21,14 @@ function App() {
 	}, [uno])
 
 	useEffect(() => {
+		console.log("%c[]", "background-color: orange")
+		//fetch("https://pokeapi.co/api/v2/pokemon/" + id).then(response => response.json())
+	}, [])
+
+	/* useEffect(() => {
 		const alertar = () => alert("HELP")
+
+		console.log(window.innerWidth)
 
 		const tres = document.querySelector(".box-3")
 
@@ -33,12 +36,17 @@ function App() {
 
 		//! Función de limpieza
 		return () => tres.removeEventListener("click", alertar)
-	})
+	}) */
 
 	return (
 		<>
 			<div className="box-1">
-				<div className="btn btn-one" onClick={() => setUno(prev => !prev)}>
+				<div
+					class="btn btn-one"
+					onClick={() => {
+						setUno(prev => !prev)
+					}}
+				>
 					<span>UNO</span>
 				</div>
 			</div>
@@ -48,7 +56,7 @@ function App() {
 				</div>
 			</div>
 			<div className="box-3">
-				<div className="btn btn-one">
+				<div className="btn btn-one" onClick={() => setId(prev => prev + 1)}>
 					<span>TRES</span>
 				</div>
 			</div>
