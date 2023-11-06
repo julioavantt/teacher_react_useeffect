@@ -15,34 +15,34 @@ function App() {
 	useEffect(() => {
 		//! Se ejecuta despues de montarse el componente y en cada cambio de estado de dependencias
 		console.log(
-			"%cSE EJECUTA SOLO CUANDO HAY CAMBIOS EN uno",
-			"background-color: lightblue"
+			"%c[] SE EJECUTA SOLO 1 VEZ DESPUÉS DE MONTAR",
+			"background-color: red; color: white"
 		)
-	}, [uno])
-
-	useEffect(() => {
-		console.log("%c[]", "background-color: orange")
-		//fetch("https://pokeapi.co/api/v2/pokemon/" + id).then(response => response.json())
 	}, [])
 
+	useEffect(() => {
+		console.log(
+			"%cSE EJECUTA SOLO CUANDO HAY CAMBIOS EN ID",
+			"background-color: lightblue"
+		)
+		fetch("https://pokeapi.co/api/v2/pokemon/" + id).then(response => response.json())
+	}, [id])
+
+	//! Descomentar para probar useEffect con función de limpieza.
 	/* useEffect(() => {
 		const alertar = () => alert("HELP")
 
-		console.log(window.innerWidth)
-
-		const tres = document.querySelector(".box-3")
-
-		tres.addEventListener("click", alertar)
+		document.addEventListener("click", alertar)
 
 		//! Función de limpieza
-		return () => tres.removeEventListener("click", alertar)
+		return () => document.removeEventListener("click", alertar)
 	}) */
 
 	return (
 		<>
 			<div className="box-1">
 				<div
-					class="btn btn-one"
+					className="btn btn-one"
 					onClick={() => {
 						setUno(prev => !prev)
 					}}
